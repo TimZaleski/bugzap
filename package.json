@@ -1,0 +1,14 @@
+{
+  "name": "bugzap",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run setup:client && npm run setup:server && npm run build:client",
+    "setup:client": "cd bugzap.client && npm i",
+    "setup:server": "cd bugzap.server && npm i",
+    "build:client": "npm run --prefix bugzap.client build",
+    "start": "node bugzap.server/index.js"
+  },
+  "engines": {
+    "node": "^14.15.4"
+  }
+}
