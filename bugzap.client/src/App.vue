@@ -8,23 +8,23 @@
           height="150"
         />
         </router-link>
-        <router-link :to="{ name: 'CreateBug' }">
-          <button>Report Bug</button>
-        </router-link>
-        <button
-          class="btn btn-outline-primary text-uppercase"
-          @click="login"
-          v-if="!user.isAuthenticated"
-        >
-          Login
-        </button>
-        <button
-          class="btn btn-outline-primary text-uppercase"
-          @click="logout"
-          v-else
-        >
-          Logout
-        </button>
+        <div class="navBarStyle">
+          <router-link :to="{ name: 'CreateBug' }">
+            <button>Report Bug</button>
+          </router-link>
+          <button
+            @click="login"
+            v-if="!user.isAuthenticated"
+          >
+            Login
+          </button>
+          <button
+            @click="logout"
+            v-else
+          >
+            Logout
+          </button>
+        </div>
       </div>
     <div class="content">
       <transition name="slideInFadeOut" mode="out-in">
@@ -119,5 +119,11 @@ export default {
 }
 .content {
   height: 100%;
+}
+
+.navBarStyle{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 </style>

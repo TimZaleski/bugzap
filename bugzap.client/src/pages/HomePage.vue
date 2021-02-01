@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="checkboxStyle">
-  <label for="HideChecked">Hide Closed</label>
+  <label for="HideChecked">Hide Closed </label>
   <input type="checkbox"
                      name="Hide Checked"
                      id="HideChecked"
@@ -56,5 +56,11 @@ export default {
 .checkboxStyle
 {
   float: right;
+  font-size: 1.25em;
+}
+
+.checkboxStyle input
+{
+  margin: 1em;
 }
 </style>

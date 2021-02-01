@@ -40,9 +40,7 @@
         <h3>Notes</h3>
       </div>
     </div>
-    <div class="row">
-      <!-- <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" /> -->
-    </div>
+    <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
     <div class="row">
       <div class="col-12" v-if="!state.activeBug.closed">
         <button
