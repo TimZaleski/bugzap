@@ -13,6 +13,7 @@ export class BugController extends BaseController {
       .post('', this.create)
       .post('/:id/notes', this.createNoteForBug)
       .put('/:id', this.edit)
+      .put('/:id/del', this.delete)
       .put('/:id/notes/:id', this.editNote)
       .delete('/:id', this.delete)
       .delete('/:id/notes/:id', this.deleteNote)
@@ -38,7 +39,7 @@ export class BugController extends BaseController {
 
   async getNotesByBug(req, res, next) {
     try {
-      const data = await noteService.getNotesByBug({ bugId: req.params.id })
+      const data = await noteService.getNotesByBug({ bug: req.params.id })
       res.send(data)
     } catch (error) {
       next(error)

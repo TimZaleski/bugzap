@@ -1,6 +1,6 @@
 export default class Note {
-  constructor({ id, content, bug, flagged, creatorEmail }) {
-    this.id = id
+  constructor({ _id, content, bug, flagged, creatorEmail }) {
+    this.id = _id
     this.content = content
     this.bug = bug
     this.flagged = flagged

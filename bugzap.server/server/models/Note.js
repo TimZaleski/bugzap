@@ -6,8 +6,7 @@ const Schema = mongoose.Schema
 const Note = new Schema({
   content: { type: String, required: true },
   bug: { type: mongodb.ObjectId, ref: 'Bug', required: true },
-  creatorEmail: { type: String, required: true },
-  flagged: { type: String, enum: ["pending", "completed", "rejected"] }
+  creatorEmail: { type: String, required: true }
 }, { timestamps: true })
 
 Note.virtual('creator', {

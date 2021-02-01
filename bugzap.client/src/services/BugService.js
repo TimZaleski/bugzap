@@ -27,7 +27,7 @@ class BugService {
 
   async getNotesByBugId(bugId) {
     try {
-      const res = await api.get('api/bus/' + bugId + '/notes')
+      const res = await api.get('api/bugs/' + bugId + '/notes')
       AppState.notes = res.data.map(n => new Note(n))
     } catch (error) {
 
@@ -38,6 +38,7 @@ class BugService {
     try {
       bug.creatorEmail = AppState.user.email
       const res = await api.post('api/bugs', bug)
+      AppState.createdBug = new Bug(res.data)
       AppState.bugs.push(res.data)
     } catch (error) {
 
@@ -54,20 +55,22 @@ class BugService {
     }
   }
 
-  async deleteBug(bugId) {
+  async deleteBug(bug, bugId) {
     try {
-      const res = await api.delete('api/bugs/' + bugId)
+      const res = await api.put('api/bugs/' + bugId + '/del', bug)
       const index = AppState.bugs.findIndex(bug => bug.id === res.data.id)
       AppState.bugs.splice(index, 1, res.data)
+      AppState.activeBug = new Bug(res.data)
     } catch (error) {
 
     }
   }
 
-  async createNoteForBug(note, bugId) {
+  async createNoteForBug(note, bug) {
     try {
-      note.bug = bugId
-      const res = await api.post('api/bugs/' + bugId + '/notes', note)
+      note.creatorEmail = AppState.user.email
+      note.bug = bug.id
+      const res = await api.post('api/bugs/' + bug.id + '/notes', note)
       AppState.notes = [...AppState.notes, new Note(res.data)]
     } catch (error) {
 

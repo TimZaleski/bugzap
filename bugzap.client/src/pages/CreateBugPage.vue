@@ -53,6 +53,7 @@
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { bugService } from '../services/BugService'
+import router from '../router'
 export default {
   name: 'CreateBug',
   setup() {
@@ -65,6 +66,7 @@ export default {
       async createBug() {
         try {
           await bugService.createBug(state.newBug)
+          router.push({ name: 'BugDetails', params: { id: AppState.createdBug.id } })
           state.newBug = {}
         } catch (error) {
           console.log(error)

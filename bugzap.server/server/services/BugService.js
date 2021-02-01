@@ -29,7 +29,7 @@ class BugService {
   }
 
   async delete(bug) {
-    bug.close = true;
+    bug.closed = true;
     const bg = await dbContext.Bugs.findOneAndUpdate({ _id: bug.id }, bug, { new: true }).populate('creator')
     if (!bg) {
       throw new BadRequest('You are not the user, or this is not a valid bug')

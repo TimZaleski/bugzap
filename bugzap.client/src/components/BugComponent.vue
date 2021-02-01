@@ -1,6 +1,6 @@
 /* eslint-disable */
 <template>
-  <div v-if="!state.hideClose || !bugProp.closed" class="bugItem">
+  <div v-if="!state.hideClose || !bugProp.closed" class="bugItem" @click="gotoBugDetails">
     <div class="bugTitle">
       <p>{{ bugProp.title}}</p>
     </div>
@@ -18,6 +18,7 @@ import { reactive, computed } from 'vue'
 import { logger } from '../utils/Logger'
 import { bugService } from '../services/BugService'
 import { AppState } from '../AppState'
+import router from '../router'
 export default {
   name: 'BugComponent',
   props: {
@@ -36,9 +37,9 @@ export default {
           logger.error(error)
         }
       },
-      async setActiveBug() {
+      gotoBugDetails() {
         try {
-          bugService.getBugById(props.bugProp.id)
+          router.push({ name: 'BugDetails', params: { id: props.bugProp.id } })
         } catch (error) {
           logger.error(error)
         }
@@ -63,6 +64,7 @@ height: auto;
 width: 100%;
 margin: 0 2em 2em;
 transition: all .4s ease-in-out;
+cursor: pointer;
 }
 
 .bugTitle{
@@ -91,6 +93,5 @@ transition: all .4s ease-in-out;
 }
 .redClosed{
   color:red
-
 }
 </style>
