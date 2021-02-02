@@ -31,7 +31,7 @@ export default {
     })
     return {
       state,
-      deleteComment() {
+      async deleteComment() {
         try {
           if (confirm('Are you sure?')) { await bugService.deleteNote(props.noteProp.bug, props.noteProp.id) }
         } catch (error) {

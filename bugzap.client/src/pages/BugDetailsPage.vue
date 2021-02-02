@@ -21,7 +21,10 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="descriptionBox"><p class="desc">{{state.activeBug.description}}</p></div>
+        <div class="descriptionBox">
+           <p class="desc" :contenteditable="state.editBug" @blur="editBug">
+          {{ state.activeBug.description }} </p>
+          </div>
       </div>
     </div>
     <div class="row">
@@ -69,7 +72,8 @@ export default {
     const state = reactive({
       activeBug: computed(() => AppState.activeBug),
       notes: computed(() => AppState.notes),
-      user: computed(() => AppState.user)
+      user: computed(() => AppState.user),
+      editBug: computed(() => (AppState.user.email === AppState.activeBug.creatorEmail) && !AppState.activeBug.closed)
     })
     onBeforeMount(async() => {
       try {
@@ -85,6 +89,14 @@ export default {
       async closeBug() {
         try {
           if (confirm('Are you sure?')) { await bugService.deleteBug(state.activeBug, state.activeBug.id) }
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      async editBug(e) {
+        try {
+          console.log(e.target.innerText)
+          bugService.editBug(AppState.activeBug.id, e.target.innerText)
         } catch (error) {
           console.log(error)
         }

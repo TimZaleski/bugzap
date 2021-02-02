@@ -45,16 +45,16 @@ class BugService {
     }
   }
 
-  async editBug(updatedBug, bugId) {
+  async editBug(bugId, newDescription) {
     try {
-      const res = await api.put('api/bugs/' + bugId, updatedBug)
+      const descriptionData = { description: newDescription }
+      const res = await api.put('api/bugs/' + bugId, descriptionData)
       const index = AppState.bugs.findIndex(bug => bug.id === res.data.id)
       AppState.bugs.splice(index, 1, res.data)
     } catch (error) {
 
     }
   }
-
   async deleteBug(bug, bugId) {
     try {
       const res = await api.put('api/bugs/' + bugId + '/del', bug)
